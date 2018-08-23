@@ -1,8 +1,10 @@
 <template lang="pug">
   div
     h1 Список WiFi
+    div.filters
+      input(v-model="name")
     ul
-      li(v-for="point in list")
+      li(v-for="point in filteredList")
         h3 {{ point.name }}
         div {{ point.place }}
         div
@@ -17,9 +19,15 @@
   export default {
     data() {
       return {
+        name: '',
         list: convert(raw),
       }
     },
+    computed: {
+      filteredList() {
+        return this.list.filter(item => item.name.includes(this.name))
+      }
+    }
   }
 </script>
 
