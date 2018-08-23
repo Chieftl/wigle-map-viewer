@@ -14,6 +14,7 @@
 <script>
   import WigleFilters from '~/components/WigleFilters.vue'
   import wigleToGeojson from 'wigle2geojson'
+  import * as wingleApi from '~/assets/js/api/main'
 
   export default {
     data() {
@@ -25,21 +26,11 @@
     methods: {
       sendQuery() {
         let self = this;
-        fetch('https://api.wigle.net/api/v2/network/search?' + this.query, {
-          headers: {
-            'Authorization': 'Basic QUlEM2FhMmYyNjcwZDA1MmEzOTA0MjlhYzgxY2M3ZDYwMzE6ZGFiODE1MzZkZjI3ZDBjM2YxYzU1ZTBjNTcwNjZlNmI=',
-          }
-        })
-          .then(function(response) {
-            console.log(response.headers.get('Content-Type')); // application/json; charset=utf-8
-            console.log(response.status); // 200
-            return response.json();
-           })
+        wingleApi.search(this.query)
           .then(function(res) {
-            console.log(res);
-            self.results = JSON.stringify(wigleToGeojson(res, ['country', 'city', 'comment']), null, 2);
+            let geojson = wigleToGeojson(res, ['country', 'city', 'comment']);
+            self.results = JSON.stringify(geojson, null, 2);
           })
-          .catch( alert );
       }
     },
     components: {
