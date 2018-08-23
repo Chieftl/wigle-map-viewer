@@ -17,6 +17,10 @@
         label longrange2
         input(v-model="filters.longrange2")
 
+      div
+        label coords
+        textarea(v-model="coords" rows="4")
+
     div.filters
       div
         label onlymine
@@ -60,6 +64,14 @@
       query() {
         return Object.entries(this.filters).filter(([, val]) => val).map(([key, val]) => key + '=' + val).join('&');
       },
+      coords: {
+        get() {
+          return [this.filters.latrange1, this.filters.latrange2, this.filters.longrange1, this.filters.longrange2].join('\n')
+        },
+        set(newValue) {
+          [this.filters.latrange1, this.filters.latrange2, this.filters.longrange1, this.filters.longrange2] = newValue.split('\n')
+        },
+      }
     },
     mounted() {
       this.$emit('filters-change', this.query)
