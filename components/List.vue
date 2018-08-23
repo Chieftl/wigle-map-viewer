@@ -2,7 +2,9 @@
   div
     h1 Список WiFi
     div.filters
-      input(v-model="name")
+      div(v-for="filter, name in filters")
+        label {{ name }}
+        input(v-model="filters[name]")
     ul
       li(v-for="point in filteredList")
         h3 {{ point.name }}
@@ -19,13 +21,16 @@
   export default {
     data() {
       return {
-        name: '',
+        filters: {
+          name: '',
+          place: '',
+        },
         list: convert(raw),
       }
     },
     computed: {
       filteredList() {
-        return this.list.filter(item => item.name.includes(this.name))
+        return this.list.filter(item => Object.keys(this.filters).every(filter => item[filter].includes(this.filters[filter])))
       }
     }
   }
