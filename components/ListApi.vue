@@ -25,11 +25,10 @@
     },
     methods: {
       sendQuery() {
-        let self = this;
         wingleApi.search(this.query)
-          .then(function(res) {
+          .then(res => {
             let geojson = wigleToGeojson(res, ['country', 'city', 'comment']);
-            self.results = JSON.stringify(geojson, null, 2);
+            this.results = JSON.stringify(geojson, null, 2);
           })
       }
     },
