@@ -83,6 +83,7 @@
   .filters {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-evenly;
     & > * {
       max-width: 20%;

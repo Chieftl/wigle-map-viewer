@@ -1,13 +1,14 @@
 <template lang="pug">
-  div
-    h1 Список
-    wigle-filters(@filters-change="query = $event")
+  div.block-with-sidebar
+    wigle-filters.wigle-filters(@filters-change="query = $event")
 
-    div.query
-      | {{ query }}
     div
-      button(@click="sendQuery" :disabled="query == ''") Send Query
-    div.response {{ results }}
+      div.query
+        | {{ query }}
+      h1 Список
+      div
+        button(@click="sendQuery" :disabled="query == ''") Send Query
+      div.response {{ results }}
 </template>
 
 <script>
@@ -48,6 +49,10 @@
 </script>
 
 <style lang="scss" scoped>
+  .block-with-sidebar {
+    display: flex;
+  }
+
   ul {
     list-style: none;
     display: flex;
