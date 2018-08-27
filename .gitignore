@@ -12,3 +12,6 @@ dist
 
 # Documents and stuff for project
 _docs
+
+# App config
+config/index.js

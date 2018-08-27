@@ -9,10 +9,12 @@
       div
         button(@click="sendQuery" :disabled="query == ''") Send Query
       div.response {{ results }}
+      mapbox-map
 </template>
 
 <script>
   import WigleFilters from '~/components/WigleFilters.vue'
+  import MapboxMap from '~/components/MapboxMap.vue'
   import wigleToGeojson from 'wigle2geojson'
   import * as wingleApi from '~/assets/js/api/main'
 
@@ -34,6 +36,7 @@
     },
     components: {
       WigleFilters,
+      MapboxMap,
     }
   }
 </script>
@@ -41,6 +44,12 @@
 <style lang="scss" scoped>
   .block-with-sidebar {
     display: flex;
+    min-width: 1200px;
+
+    & > *:last-child {
+      flex: 1 0;
+      text-align: justify;
+    }
   }
 
   ul {

@@ -1,0 +1,10 @@
+export default {
+  mapbox: {
+    accessToken: '<<<mapbox accessToken>>>',
+    mapOptions: {
+      style: 'mapbox://styles/mapbox/streets-v9',
+      center: [24.71, 48.92],
+      zoom: 13
+    }
+  }
+}

@@ -1,3 +1,5 @@
+const webpack = require('webpack');
+
 module.exports = {
   /*
   ** Headers of the page
@@ -10,7 +12,8 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'WiFi map' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' },
     ]
   },
   /*
@@ -24,6 +27,12 @@ module.exports = {
     /*
     ** Run ESLint on save
     */
+    plugins: [
+      new webpack.ProvidePlugin({
+        mapboxgl: 'mapbox-gl'
+      })
+    ],
+    vendor: ['mapbox-gl'],
     extend (config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
@@ -36,4 +45,3 @@ module.exports = {
     }
   }
 }
-
