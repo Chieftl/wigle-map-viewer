@@ -26,6 +26,7 @@
           bounds._sw.lng,
           bounds._ne.lng,
         ];
+        this.$store.commit('setBounds', boundCoords);
         console.log(boundCoords);
       }
     },

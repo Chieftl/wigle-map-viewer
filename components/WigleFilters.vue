@@ -3,19 +3,19 @@
     div.filters
       div
         label latrange1
-        input(v-model="filters.latrange1")
+        input(v-model="filters.latrange1" disabled)
 
       div
         label latrange2
-        input(v-model="filters.latrange2")
+        input(v-model="filters.latrange2" disabled)
 
       div
         label longrange1
-        input(v-model="filters.longrange1")
+        input(v-model="filters.longrange1" disabled)
 
       div
         label longrange2
-        input(v-model="filters.longrange2")
+        input(v-model="filters.longrange2" disabled)
 
       div
         label coords
@@ -66,10 +66,9 @@
       },
       coords: {
         get() {
-          return [this.filters.latrange1, this.filters.latrange2, this.filters.longrange1, this.filters.longrange2].join('\n')
-        },
-        set(newValue) {
-          [this.filters.latrange1, this.filters.latrange2, this.filters.longrange1, this.filters.longrange2] = newValue.split('\n')
+          let newValue = this.$store.getters.getBounds;
+          [this.filters.latrange1, this.filters.latrange2, this.filters.longrange1, this.filters.longrange2] = newValue
+          return newValue.join('\n')
         },
       }
     },
